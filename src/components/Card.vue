@@ -1,11 +1,11 @@
 <template>
-  <div class="card-wrap"
-    ref="card">
-    <div class="card"
+  <div class="card-wrap" ref="card"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousemove="handleMouseMove"
     @dblclick="handleDblClick"
+    >
+    <div class="card"
       :style="cardStyle">
       <div class="card-bg" 
       :class="{'card-bg__fade-in': bgImageURL}"
@@ -118,12 +118,14 @@ export default {
 <style scoped lang="scss">
 $hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
 $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+$card-width: 240px;
+$card-height: 320px;
 
 .card-wrap {
   // Moved these here from card.
   // If we didn't, card-wrap can occupy the whole width, screwing the formula.
-  width: 240px;
-  height: 320px;
+  width: $card-width;
+  height: $card-height;
 
   margin: 10px;
   transform: perspective(800px);
@@ -135,10 +137,12 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
     .card-info {
       transform: translateY(0);
     }
-    .card-info p {
+    .card-info p,
+    .card-info h1 {
       opacity: 1;
     }
     .card-info,
+    .card-info h1,
     .card-info p {
       transition: 0.6s $hoverEasing;
     }
@@ -148,9 +152,10 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
       transform: translateY(0);
     }
     .card-bg {
-      //sped up hover easing
+      // Sped up hover easing
       transition: 0.6s $hoverEasing, opacity 1s $hoverEasing;
-      opacity: 0.8;
+      // Increased opacity from of 0.8
+      opacity: 0.9;
     }
     .card {
       transition: 0.6s $hoverEasing, box-shadow 2s $hoverEasing;
@@ -163,7 +168,7 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
 .card {
   position: relative;
-  flex: 0 0 240px;
+  flex: 0 0 $card-width;
   width: 100%;
   height: 100%;
   background-color: #333;
@@ -200,15 +205,34 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 .card-info {
   // Added to not cut off titles.
   word-break: keep-all;
-  padding: 20px;
+  // Affects overall size computations, making 100% exceed $card-x.
+  //padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   position: absolute;
   bottom: 0;
   color: #fff;
   // card-info DEFAULT Y postion is via an FFF'n xfrom displacement!!!
   //transform: translateY(40%);
   //transform: translateY(20%);
-  transform: translateY(20px);
+  transform: translateY(40px);
   transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  // Added this to experiement centering of title.
+  width: 100%;
+
+  h1 {
+    //font-family: "Playfair Display";
+    //font-family: "Raleway";
+    //font-size: 36px;
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: rgba(black, 0.5) 0 10px 10px;
+
+    // Playung around.
+    opacity: 0.4;
+    transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 
   p {
     opacity: 0;
@@ -241,6 +265,7 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
   }
 }
 
+/*
 .card-info h1 {
   //font-family: "Playfair Display";
   //font-family: "Raleway";
@@ -249,4 +274,5 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
   font-weight: 700;
   text-shadow: rgba(black, 0.5) 0 10px 10px;
 }
+*/
 </style>
