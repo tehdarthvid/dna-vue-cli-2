@@ -6,9 +6,6 @@ import App from "./App";
 import router from "./router";
 import store from "./store";
 
-let scripts = document.getElementsByTagName("script");
-console.log(`loading: ${scripts[scripts.length - 1].src}`);
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

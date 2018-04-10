@@ -1,7 +1,8 @@
 {
   "name": "vue-dna",
-  "version": "1.0.1",
-  "description": "A Vue.js project",
+  "version": "1.0.2",
+  "description":
+    "VueJS conversion of @darthvid's personal influences (DNA) visualization project.",
   "author": "@darthvid",
   "private": true,
   "scripts": {

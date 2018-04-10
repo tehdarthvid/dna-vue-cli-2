@@ -1,8 +1,13 @@
 <template>
   <div id="app">
-    <h1>darthvid's influences DNA</h1>
-    <p>[also the target for webdev study and experiments]</p>
-    <router-view/>
+    <div id="version">{{versionString}}</div>
+    <div id="title">
+      <h1>darthvid's influences DNA</h1>
+      <p>[also the target for webdev study and experiments]</p>
+    </div>
+    <div id="content">
+      <router-view/>
+    </div>
   </div>
 </template>
 <!--
@@ -16,7 +21,17 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  created: function() {
+    console.log(this.versionString);
+  },
+  computed: {
+    versionString: function() {
+      return `${
+        "development" === process.env.NODE_ENV ? "dev" : ""
+      } v${__PKG_VERSION__} b${__GIT_COMMIT_NUMBER__}`;
+    }
+  }
 };
 </script>
 
@@ -57,5 +72,12 @@ p + p {
 * {
   -webkit-margin-before: 0px;
   -webkit-margin-after: 0px;
+}
+
+#version {
+  width: 100%;
+  top: 0;
+  position: absolute;
+  text-align: right;
 }
 </style>
